@@ -38,10 +38,9 @@ class Home extends React.Component {
   }
 
   render() {
-    const { news, categories } = this.props;
     const { templates } = this.state;
-    const { test } = this.state;
-    // console.log(news);
+    const newsBoxTemplate = [6, 6301, 6303];
+    const articleBoxTemplate = [59, 63, 6304];
     console.log(templates);
 
     return (
@@ -53,17 +52,8 @@ class Home extends React.Component {
             { templates.length > 0 ? 
               templates.map( (template,index) => (
                 <div key={`template-${index}`}>
-                  {console.log(template.sections.length)}
-                  { template.sections[0].articles.length === 1 && 
-                    template.sections[0].articles[0].source === "AD" ? console.log("AD")
-                    : 
-                    template.title ? (
-                      <ArticlesBox>
-
-                      </ArticlesBox>
-                    )
-                    :
-                    template.sections.length > 1 ? (
+                  { template.type === 50 ? 
+                    (
                       <div>
                         <div className="carousel-container">
                           <Swiper
@@ -76,9 +66,9 @@ class Home extends React.Component {
                             autoplay={{ delay: 3500}}
                             className="carousel-swiper"
                           >
-                            {template.sections[0].articles.map( (article) => (
+                            {template.sections[0].articles.map( (article, idx) => (
                               <SwiperSlide
-                                className=""
+                                key={`swiper-article-${idx}`}
                               >
                                 <a
                                   href={article.url.url}
@@ -103,12 +93,26 @@ class Home extends React.Component {
                         />
                       </div>
                     )
-                    : 
+                    :
+                    newsBoxTemplate.includes(template.type) ?
                     (
                       <NewsBox
                         news = { template.sections[0].articles }
+                        title = { template.title }
+                        viewEnabled = { template.type === 6303 }
                       />
                     )
+                    :
+                    articleBoxTemplate.includes(template.type) ?
+                    (
+                      <ArticlesBox
+                        news = { template.sections[0].articles }
+                        title = { template.title }
+                        whiteBox = { template.type !== 6304 }
+                      />
+                    )
+                    :
+                    null
                   }
                 </div>
               ))

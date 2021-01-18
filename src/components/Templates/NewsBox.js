@@ -8,17 +8,18 @@ class NewsBox extends React.Component {
   }
 
   render() {
-    const { news } = this.props;
+    const { news, title, viewEnabled } = this.props;
     return (
       <React.Fragment>
         { news && news.length > 0 ?
-        <div className="box-body box-padding">
+        <div className="box-padding">
+          <div className="heading margin-bottom-sm">{title}</div>
           {news.map( (newsItem,index) => (
-            <div key={`newsline-${index}`}>
-              <NewsLine
-                item={newsItem}
-              />
-            </div>
+            <NewsLine
+              key={`newsline-${index}`}
+              item={newsItem}
+              viewEnabled={viewEnabled}
+            />
           ))}
         </div>
         : null }

@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
   --font-size-14    : 14px;
   --font-size-15    : 15px;
   --font-size-18    : 18px;
+  --font-size-20    : 20px;
   --font-size-24    : 24px;
   --font-size-32    : 32px;
   --font-size-48    : 48px;
@@ -113,6 +114,11 @@ button:focus {
   font-weight: var(--font-weight-700);
 }
 
+.heading {
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-700);
+}
+
 .bold {
   font-weight: var(--font-weight-700)
 }
@@ -122,11 +128,15 @@ button:focus {
 //////////////
 
 .black {
-  color: var(--black)
+  color: var(--black);
 }
 
 .tab-grey {
-  color: var(--grey-2)
+  color: var(--grey-2);
+}
+
+.white {
+  color: var(--white);
 }
 
 /////////////////
@@ -392,6 +402,42 @@ button:focus {
   padding-right: var(--spacing-xl);
 }
 
+.article-container {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.article-grid-container {
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-gap: 20px;
+}
+
+.article-img {
+  position: relative;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 3px;
+  object-fit: cover;
+  max-height: 164px;
+  width: 100%;
+}
+
+.article-img-container {
+  flex: 0 0 100%;
+  height: auto;
+  width: 50%;
+}
+
+.article-piece-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .box-body {
   background-color: var(--grey-3);
 }
@@ -401,7 +447,6 @@ button:focus {
 }
 
 .carousel-container {
-  // height: 434px;
   height: fit-content;
 }
 
@@ -412,7 +457,6 @@ button:focus {
   background-position: 50%;
   background-repeat: no-repeat;
   object-fit: contain;
-  // height: 100%;
   max-height: 384px;
   width: 100%;
 }
@@ -465,6 +509,14 @@ button:focus {
   background-color: var(--grey-3);
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.display-flex {
+  display: flex;
+}
+
 .header-bar {
   display: flex;
   justify-content: space-between;
@@ -473,6 +525,10 @@ button:focus {
 .header-content {
   padding: var(--spacing-xxs);
   background: var(--white);
+}
+
+.height-100 {
+  height: 100%;
 }
 
 .main {
@@ -537,7 +593,6 @@ button:focus {
   align-items: center;
   justify-content: center;
   width: auto;
-  // padding: 0 var(--spacing-sm);
   cursor: pointer;
 }
 
@@ -579,6 +634,12 @@ button:focus {
   padding: 8px;
   align-items: center;
   height: 40px;
+}
+
+.white-box {
+  background-color: var(--white);
+  padding: var(--layout-md);
+  border-radius: 3px;
 }
 
 .width-auto {
