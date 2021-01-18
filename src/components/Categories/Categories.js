@@ -13,9 +13,23 @@ class CategoryBar extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    let urlTab = parseInt(urlParams.get("tab"));
+    if (!isNaN(urlTab)) {
+      this.setState({activeTab: urlTab});
+      this.props.currentCategory(urlTab);
+    } else {
+      this.props.currentCategory(0);
+    }
+  }
+
   activateTab = (tabId) => {
     const newTab = parseInt(tabId.charAt(tabId.length-1));
     this.setState({activeTab: newTab});
+    window.history.replaceState(null, null, `?tab=${newTab}`);
+    this.props.currentCategory(newTab);
   }
 
   render() {
@@ -29,6 +43,7 @@ class CategoryBar extends React.Component {
             <Swiper
               slidesPerView={9}
               className="text-medium tab-swiper"
+              onSwiper={() => this.props.currentCategory(activeTab)}
             >
               { categories.map( (category, idx) => (
                 <SwiperSlide
