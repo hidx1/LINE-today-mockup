@@ -3,6 +3,9 @@ import {
   NEWS_FETCH,
   NEWS_FETCH_SUCCESS,
   NEWS_FETCH_FAIL,
+  TAB_UPDATE,
+  TAB_UPDATE_SUCCESS,
+  TAB_UPDATE_FAIL,
 } from './constants';
 
 export function defaultAction() {
@@ -26,5 +29,24 @@ export function getNewsSuccess() {
 export function getNewsFail() {
   return {
     type: NEWS_FETCH_FAIL
+  }
+}
+
+export function updateTabAction(tabNum) {
+  return {
+    type: TAB_UPDATE,
+    tabNum: tabNum,
+  }
+}
+
+export function updateTabSuccess() {
+  return {
+    type: TAB_UPDATE_SUCCESS
+  }
+}
+
+export function updateTabFail() {
+  return {
+    type: TAB_UPDATE_FAIL
   }
 }

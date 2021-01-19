@@ -17,11 +17,6 @@ SwiperCore.use([Navigation, Pagination, Autoplay]);
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentCategory: 0,
-      templates: [],
-      test: null,
-    }
   }
 
   componentDidMount() {
@@ -38,9 +33,11 @@ class Home extends React.Component {
   }
 
   render() {
-    const { templates } = this.state;
+    const { news, activeTab } = this.props;
     const newsBoxTemplate = [6, 6301, 6303];
     const articleBoxTemplate = [59, 63, 6304];
+    let templates = [];
+    if (news.length > 0) templates = news[activeTab].templates;
     console.log(templates);
 
     return (
@@ -129,6 +126,7 @@ const mapStateToProps = state => {
     news: state.news,
     categories: state.categories,
     error: state.error,
+    activeTab: state.activeTab,
   };
 }
 

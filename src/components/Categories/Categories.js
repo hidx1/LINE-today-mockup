@@ -1,16 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { updateTabAction } from '../../store/actions';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 
 class CategoryBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      activeTab: 0,
-    }
   }
 
   componentDidMount() {
@@ -18,23 +16,18 @@ class CategoryBar extends React.Component {
     const urlParams = new URLSearchParams(queryString);
     let urlTab = parseInt(urlParams.get("tab"));
     if (!isNaN(urlTab)) {
-      this.setState({activeTab: urlTab});
-      this.props.currentCategory(urlTab);
-    } else {
-      this.props.currentCategory(0);
-    }
+      this.props.updateTab(urlTab);
+    } 
   }
 
   activateTab = (tabId) => {
     const newTab = parseInt(tabId.charAt(tabId.length-1));
-    this.setState({activeTab: newTab});
     window.history.replaceState(null, null, `?tab=${newTab}`);
-    this.props.currentCategory(newTab);
+    this.props.updateTab(newTab);
   }
 
   render() {
-    const { categories } = this.props;
-    const { activeTab } = this.state;
+    const { categories, activeTab } = this.props;
     
     return (
       <React.Fragment>
@@ -43,7 +36,6 @@ class CategoryBar extends React.Component {
             <Swiper
               slidesPerView={9}
               className="text-medium tab-swiper"
-              onSwiper={() => this.props.currentCategory(activeTab)}
             >
               { categories.map( (category, idx) => (
                 <SwiperSlide
@@ -67,9 +59,18 @@ const mapStateToProps = state => {
   return { 
     categories: state.categories,
     error: state.error,
+    activeTab: state.activeTab,
   };
 }
 
-const Categories = connect(mapStateToProps, null)(CategoryBar);
+function mapDispatchToProps(dispatch) {
+  return {
+    updateTab: (tabNum) => {
+      dispatch(updateTabAction(tabNum));
+    }
+  }
+}
+
+const Categories = connect(mapStateToProps, mapDispatchToProps)(CategoryBar);
 
 export default Categories;
