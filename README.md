@@ -27,6 +27,7 @@ LINE TODAY website look-a-like
     yarn start
     ```
 4. Open localhost:8080/
+5. If data not loaded, use CORS extension and change the API call in src/containers/HomePage/home-saga.js
 
 ## Screenshots
 ![SS 1](public/Screenshots/1.PNG)

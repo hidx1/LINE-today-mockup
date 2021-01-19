@@ -8,17 +8,17 @@ import axios from 'axios';
 function getArticles() {
   return new Promise(resolve => {
     /** USE THIS IF NOT USING ANY CORS EXTENSION */
-    // const res = axios.get(`https://cors-anywhere.herokuapp.com/today.line.me/id/portaljson`, {
-    //   headers: {
-    //     'Access-Control-Allow-Origin': '*',
-    //     'X-Requested-With': 'XMLHttpRequest',
-    //   }
-    // });
+    const res = axios.get(`https://cors-anywhere.herokuapp.com/today.line.me/id/portaljson`, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'X-Requested-With': 'XMLHttpRequest',
+      }
+    });
 
     /** 
      * USE THIS IF USING CORS EXTENSION (e.g. CORS Unblock for Chrome or CORS Everywhere for Firefox) 
      * */
-    const res = axios.get(`https://today.line.me/id/portaljson`);
+    // const res = axios.get(`https://today.line.me/id/portaljson`);
     resolve(res);
   });
 }
