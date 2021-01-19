@@ -12,8 +12,7 @@ class NewsWrapper extends React.Component {
 
   render() {
     const { categories, news, title, whiteBox } = this.props;
-    const trendingWords = 
-    ["trending", "highlight", "viral", "dikomentari", "commented"];
+    const trendingWords = ["trending", "highlight", "viral", "dikomentari", "commented"];
 
     let viewEnabled = false;
     if (title) {

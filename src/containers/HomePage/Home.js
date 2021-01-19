@@ -33,7 +33,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { news, activeTab } = this.props;
+    const { news, activeTab, error } = this.props;
     const newsBoxTemplate = [6, 50, 6301, 6302, 6303];
     const articleBoxTemplate = [59, 63, 6304];
     let templates = [];
@@ -43,7 +43,6 @@ class Home extends React.Component {
       const contentIdx = templates.findIndex(x => x.type === 6);
       if (templates[contentIdx]) carouselContent = templates[contentIdx].sections[0].articles;
     }
-    console.log(templates);
 
     return (
       <div>
@@ -114,7 +113,12 @@ class Home extends React.Component {
                   }
                 </div>
               ))
-            : null }
+            :
+            error ? (
+              <div className="center">
+                <h1>NO DATA.<br/>USE CORS EXTENSION OR USE CORS ANYWHERE URL</h1>
+              </div>
+            ) : null }
           </div>
         </div>
       </div>

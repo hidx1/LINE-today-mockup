@@ -496,7 +496,7 @@ button:focus {
 .carousel-text {
   position: relative;
   background-color: var(--white);
-  height: 68px;
+  height: 66px;
   width: calc(100% - 86px);
   border-radius: 3px;
   box-shadow: 0 0 8px 0 rgba(0,0,0,.04);
@@ -521,6 +521,7 @@ button:focus {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .content-body {
@@ -604,7 +605,7 @@ button:focus {
 }
 
 .swiper-pagination {
-  bottom: 75px !important;
+  bottom: 82px !important;
 }
 
 .tab-item {
