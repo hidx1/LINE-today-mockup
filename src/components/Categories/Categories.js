@@ -21,8 +21,8 @@ class CategoryBar extends React.Component {
   }
 
   activateTab = (tabId) => {
-    const newTab = parseInt(tabId.charAt(tabId.length-1));
-    window.history.replaceState(null, null, `?tab=${newTab}`);
+    const arr = tabId.split('-');
+    const newTab = parseInt(arr[arr.length-1]);
     this.props.updateTab(newTab);
   }
 

@@ -34,10 +34,15 @@ class Home extends React.Component {
 
   render() {
     const { news, activeTab } = this.props;
-    const newsBoxTemplate = [6, 6301, 6303];
+    const newsBoxTemplate = [6, 50, 6301, 6302, 6303];
     const articleBoxTemplate = [59, 63, 6304];
     let templates = [];
-    if (news.length > 0) templates = news[activeTab].templates;
+    let carouselContent = [];
+    if (news.length > 0) {
+      templates = news[activeTab].templates;
+      const contentIdx = templates.findIndex(x => x.type === 6);
+      if (templates[contentIdx]) carouselContent = templates[contentIdx].sections[0].articles;
+    }
     console.log(templates);
 
     return (
@@ -46,57 +51,53 @@ class Home extends React.Component {
           <Header/>
           <div className="main">
             <Categories currentCategory={this.setCurrentCategory}/>
+            
+              { carouselContent.length > 0 ? (
+                <div className="carousel-container">
+                  <Swiper
+                    slidesPerView={1}
+                    navigation
+                    pagination={{
+                      clickable: true,
+                    }}
+                    loop={true}
+                    autoplay={{ delay: 3500}}
+                    className="carousel-swiper"
+                  >
+                    { carouselContent.map( (article, idx) => (
+                      <SwiperSlide
+                        key={`swiper-article-${idx}`}
+                      >
+                        <a
+                          href={article.url.url}
+                          className="carousel-img-container"
+                        >
+                          <img
+                            className="carousel-img"
+                            src={`https://obs.line-scdn.net/${article.thumbnail.hash}`}
+                            alt={article.title}
+                          />
+                          
+                          <div className="carousel-text text-big text-overflow-2-lines">
+                            {article.title}
+                          </div>
+                        </a>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
+              ) : null }
+            
             { templates.length > 0 ? 
               templates.map( (template,index) => (
                 <div key={`template-${index}`}>
-                  { template.type === 50 ? 
-                    (
-                      <div>
-                        <div className="carousel-container">
-                          <Swiper
-                            slidesPerView={1}
-                            navigation
-                            pagination={{
-                              clickable: true,
-                            }}
-                            loop={true}
-                            autoplay={{ delay: 3500}}
-                            className="carousel-swiper"
-                          >
-                            {template.sections[0].articles.map( (article, idx) => (
-                              <SwiperSlide
-                                key={`swiper-article-${idx}`}
-                              >
-                                <a
-                                  href={article.url.url}
-                                  className="carousel-img-container"
-                                >
-                                  <img
-                                    className="carousel-img"
-                                    src={`https://obs.line-scdn.net/${article.thumbnail.hash}`}
-                                    alt={article.title}
-                                  />
-                                  
-                                  <div className="carousel-text text-big text-overflow-2-lines">
-                                    {article.title}
-                                  </div>
-                                </a>
-                              </SwiperSlide>
-                            ))}
-                          </Swiper>
-                        </div>
-                        <NewsBox
-                          news = { template.sections[1].articles }
-                        />
-                      </div>
-                    )
-                    :
+                  { 
                     newsBoxTemplate.includes(template.type) ?
                     (
                       <NewsBox
                         news = { template.sections[0].articles }
                         title = { template.title }
-                        viewEnabled = { template.type === 6303 }
+                        whiteBox = { template.type === 6301 }
                       />
                     )
                     :

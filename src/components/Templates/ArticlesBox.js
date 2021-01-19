@@ -1,26 +1,33 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { updateTabAction } from '../../store/actions';
 
 import ArticlePiece from './ArticlePiece';
 
-class ArticlesBox extends React.Component {
+class ArticlesWrapper extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { news, title, whiteBox } = this.props;
+    const { categories, news, title, whiteBox } = this.props;
     return (
       <React.Fragment>
         { news && news.length > 0 ? (
           <div className={`box-padding`}>
-            <div className={`${whiteBox ? "white-box" : ""}`}>
+            <div className={`${whiteBox ? "white-box box-shadow" : ""}`}>
               <div 
                 className={`heading margin-bottom-sm 
                   ${whiteBox ? "cursor-pointer" : ""}`
                 }
-                // onClick={()}
+                onClick={ () =>
+                  this.props.updateTab(categories.findIndex(x => x.id === news[0].categoryId))
+                }
               >
-                { title }
+                { title ? 
+                  whiteBox ? title + " >" : title
+                : null }
               </div>
               <div className="article-grid-container">
                 { news.map( (newsItem, index) => (
@@ -30,6 +37,18 @@ class ArticlesBox extends React.Component {
                   />
                 ))}
               </div>
+              { whiteBox ? (
+                <div className="box-footer">
+                  <div
+                    className="box-footer-text cursor-pointer text-small-thin"
+                    onClick={ () =>
+                      this.props.updateTab(categories.findIndex(x => x.id === news[0].categoryId))
+                    }
+                  >
+                    Lihat lainnya &gt;
+                  </div>
+                </div>
+              ) : null }
             </div>
           </div>
         ) : null }
@@ -37,5 +56,21 @@ class ArticlesBox extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return { 
+    categories: state.categories,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    updateTab: (tabNum) => {
+      dispatch(updateTabAction(tabNum));
+    }
+  };
+}
+
+const ArticlesBox = connect(mapStateToProps, mapDispatchToProps)(ArticlesWrapper);
 
 export default ArticlesBox;

@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
   --font-size-48    : 48px;
   --font-size-64    : 64px;
   --font-weight-300 : 300;
+  --font-weight-400 : 400;
   --font-weight-500 : 500;
   --font-weight-700 : 700;
 
@@ -102,6 +103,11 @@ button:focus {
 .text-small {
   font-size: var(--font-size-14);
   font-weight: var(--font-weight-500);
+}
+
+.text-small-thin {
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-400);
 }
 
 .text-medium {
@@ -438,15 +444,30 @@ button:focus {
   flex-wrap: wrap;
 }
 
-.box-body {
-  background-color: var(--grey-3);
+.box-footer {
+  display: flex;
+  position: relative;
+  text-align: right;
+  margin-top: var(--layout-sm);
+  border-top: 1px solid var(--grey-1);
+}
+
+.box-footer-text {
+  padding: var(--spacing-xxs) var(layout-md);
+  margin-top: var(--spacing-sm);
+  width: 100%;
 }
 
 .box-padding {
   padding: var(--layout-md) var(--spacing-lg);
 }
 
+.box-shadow {
+  box-shadow: 0 0 8px 0 rgba(0,0,0,.04);
+}
+
 .carousel-container {
+  background-color: var(--grey-3);
   height: fit-content;
 }
 

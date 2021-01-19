@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-class Header extends React.Component {
+import { updateTabAction } from '../../store/actions';
+
+class HeaderBar extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -12,7 +15,7 @@ class Header extends React.Component {
           <div className="header-bar">
             <button
               className="titlebar-btn"
-              onClick={() => location.assign('localhost:8080')}
+              onClick={() => this.props.updateTab(0)}
             >
               <img 
                 src="https://static-today.line-scdn.net/dist/59120d06/static/img/brand-logo-rectangle-today-solid.svg"
@@ -31,5 +34,15 @@ class Header extends React.Component {
     )
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    updateTab: (tabNum) => {
+      dispatch(updateTabAction(tabNum));
+    }
+  };
+}
+
+const Header = connect(null, mapDispatchToProps)(HeaderBar);
 
 export default Header;

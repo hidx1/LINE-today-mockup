@@ -16,7 +16,6 @@ const initialState = {
 };
 
 function rootReducer(state = initialState, action) {
-  console.log(action.type);
   switch (action.type) {
     case DEFAULT_ACTION:
       return state;
@@ -34,7 +33,8 @@ function rootReducer(state = initialState, action) {
     case TAB_UPDATE:
       return state;
     case TAB_UPDATE_SUCCESS:
-      console.log(action);
+      window.history.replaceState(null, null, `?tab=${action.activeTab}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return Object.assign({}, state, {
         activeTab: action.activeTab
       });
