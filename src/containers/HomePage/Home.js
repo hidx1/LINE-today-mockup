@@ -56,9 +56,6 @@ class Home extends React.Component {
                   <Swiper
                     slidesPerView={1}
                     navigation
-                    pagination={{
-                      clickable: true,
-                    }}
                     loop={true}
                     autoplay={{ delay: 3500}}
                     className="carousel-swiper"

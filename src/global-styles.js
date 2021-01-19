@@ -471,15 +471,28 @@ button:focus {
   height: fit-content;
 }
 
-.carousel-img {
-  z-index: 2;
-  width: 100%;
-  position: relative;
-  background-position: 50%;
-  background-repeat: no-repeat;
-  object-fit: contain;
-  max-height: 384px;
-  width: 100%;
+@media (max-width: 576px){
+  .carousel-img {
+    z-index: 2;
+    position: relative;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    max-height: 144px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 576px){
+  .carousel-img {
+    z-index: 2;
+    position: relative;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    max-height: 384px;
+    width: 100%;
+  }
 }
 
 .carousel-img-container {
